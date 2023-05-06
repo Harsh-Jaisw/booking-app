@@ -41,11 +41,20 @@ export const getByIdHotel=async(req,res,next)=>{
 }
 
 export const getHotel=async(req,res,next)=>{
-  // const failed=true
-    // if(failed) return next(createError(401,"You are not authenticated."))
     try {
-        const hotels= await hotel.find()
+        const hotels=await hotel.find()
       res.status(200).json(hotels)   
+     } catch (error) {
+         next(error)
+     }
+}
+export const countByCity=async(req,res,next)=>{
+   const cities=req.query.cities.split(",")
+    try {
+        const list =await Promise.all(cities.map(city=>{
+            return hotel.countDocuments({city:city})
+        }))
+      res.status(200).json(list)   
      } catch (error) {
          next(error)
      }
