@@ -5,6 +5,7 @@ import style from "./list.module.css";
 import { format } from "date-fns";
 import { useLocation } from "react-router-dom";
 import { DateRange } from "react-date-range";
+import SearchItem from "../../components/SearchItem/SearchItem";
 function List() {
   const location = useLocation();
   const [open, setOpen] = useState(false);
@@ -39,6 +40,7 @@ function List() {
             </div>
             <div className={style.lsItem}>
               <label>Options</label>
+              <div className={style.lsOptions}> 
              <div className={style.lsOptionItem}>
               <span className={style.lsOptionText}>Min price <small>per night</small></span>
              <input type="number" className={style.lsOptionInput}/>
@@ -49,19 +51,23 @@ function List() {
              </div>
              <div className={style.lsOptionItem}>
               <span className={style.lsOptionText}>Adult </span>
-             <input type="number" className={style.lsOptionInput}/>
+             <input type="number" min={1} placeholder={options.adult} className={style.lsOptionInput}/>
              </div>
              <div className={style.lsOptionItem}>
               <span className={style.lsOptionText}>Children </span>
-             <input type="number" className={style.lsOptionInput}/>
+             <input type="number" min={0} placeholder={options.children} className={style.lsOptionInput}/>
              </div>
              <div className={style.lsOptionItem}>
               <span className={style.lsOptionText}>Room </span>
-             <input type="number" className={style.lsOptionInput}/>
+             <input type="number" min={1} placeholder={options.room} className={style.lsOptionInput}/>
              </div>
+              </div>
             </div>
+            <button >Search</button>
           </div>
-          <div className={style.listResult}></div>
+          <div className={style.listResult}>
+            <SearchItem/>
+          </div>
         </div>
       </div>
     </>
