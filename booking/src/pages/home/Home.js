@@ -1,9 +1,13 @@
 import React from 'react'
+import style from "./Home.module.css"
 
+import Header from '../../components/header/Header'
+import Navbar from '../../components/Navbar/Navbar'
 function Home() {
   return (
-    <div>
-      This is home page. react is really slow instead of using virtual dom.
+   <div>
+    <Navbar/>
+    <Header type="list"/>
     </div>
   )
 }
