@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import {useNavigate} from "react-router-dom"
 import style from "./Header.module.css";
 import { GiBed } from "react-icons/gi";
 import { FaBed } from "react-icons/fa";
@@ -9,6 +10,9 @@ import 'react-date-range/dist/styles.css';
 import 'react-date-range/dist/theme/default.css';
 import {format} from "date-fns"
 function Header({type}) {
+  const navigate=useNavigate()
+  
+  const[destination,setDestination]=useState("")
   const [open,setOpen]=useState(false)
     const [date,setDate]=useState([
         {
@@ -30,9 +34,12 @@ function Header({type}) {
         }
       })
     }
+    function handleSearch(){
+      navigate("/hotels",{state:{destination,date,options}})
+    }
   return (
     <div className={style.header}>
-      <div className={type!=="list" ? style.headerContainer.listMode :style.headerContainer}>
+      <div className={type==="list" ? style.headerContainerlistMode :style.headerContainer}>
         <div className={style.headerList}>
           <div className={`${style.headerListItem} ${style.active}`}>
             <GiBed />
@@ -55,7 +62,7 @@ function Header({type}) {
             <span>Taxis</span>
           </div>
         </div>
-       {type=="list" &&
+       {type!=="list" &&
         <> <h1 className={style.headerTitle}>
           Over 157,000 hotels and homes across 35 countries
         </h1>
@@ -69,6 +76,7 @@ function Header({type}) {
               type="text"
               className={style.headerSearchInput}
               placeholder="Search by city or hotel"
+              onChange={(e)=>setDestination(e.target.value)}
             /></div>
           <div className={style.headerSearchItem}>
             <span onClick={()=>setOpen(!open)} className={style.headerSearchText}>
@@ -76,6 +84,7 @@ function Header({type}) {
             </span>
             {open && <DateRange
               editableDateInputs={true}
+              minDate={new Date()}
               onChange={(item)=>setDate([item.selection])}
               ranges={date}
               className={style.date}
@@ -116,7 +125,7 @@ function Header({type}) {
             </div>}
           </div>
           <div className={style.headerSearchItem}>
-          <button className={style.headerSearchBtn}>Search</button>
+          <button className={style.headerSearchBtn} onClick={handleSearch}>Search</button>
           </div>
         </div></>}
       </div>
