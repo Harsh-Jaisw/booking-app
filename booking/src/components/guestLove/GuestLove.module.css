@@ -18,6 +18,7 @@
 }
 .fpCity{
     font-weight: 300;
+    text-transform: capitalize;
 }
 .fpname{
     font-weight: bold;

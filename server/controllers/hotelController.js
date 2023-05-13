@@ -41,8 +41,9 @@ export const getByIdHotel=async(req,res,next)=>{
 }
 
 export const getHotel=async(req,res,next)=>{
+   const {min,max,...others}=req.query
     try {
-        const hotels=await hotel.find()
+        const hotels=await hotel.find({...others,cheapestPrice:{$gt:min | 1,$lt:max||990}}).limit(req.query)
       res.status(200).json(hotels)   
      } catch (error) {
          next(error)
@@ -59,3 +60,20 @@ export const countByCity=async(req,res,next)=>{
          next(error)
      }
 }
+export const countByType=async(req,res,next)=>{
+   try{
+    const hotelCount=await hotel.countDocuments({type:"hotel"})
+    const apartmentCount=await hotel.countDocuments({type:"apartment"})
+    const villaCount=await hotel.countDocuments({type:"villa"})
+    const resortsCount=await hotel.countDocuments({type:"resorts"})
+    
+       res.status(200).json([
+        {type:"hotel",count:hotelCount},
+        {type:"apartments",count:apartmentCount},
+        {type:"villas",count:villaCount},
+        {type:"resorts",count:resortsCount}
+       ])   
+      } catch (error) {
+          next(error)
+      }
+ }

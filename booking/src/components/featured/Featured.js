@@ -1,9 +1,12 @@
 import React from "react";
 import style from "./Featured.module.css";
+import useFetch from "../../hooks/useFetch";
 function Featured() {
+  const {data,loading,error}=useFetch("/hotels/countByCity?cities=agra,lucknow,kanpur")
+  // console.log(data)
   return (
     <div className={style.featured}>
-      <div className={style.featuredItem}>
+      {loading ?"Laoding Please Wait": <><div className={style.featuredItem}>
         <img
           alt=""
           className={style.featuredImg}
@@ -11,7 +14,7 @@ function Featured() {
         />
         <div className={style.featuredTitles}>
           <h1>Goa</h1>
-          <h2>5,247 properties</h2>
+          <h2>{data[0]} properties</h2>
         </div>
       </div>
       <div className={style.featuredItem}>
@@ -22,7 +25,7 @@ function Featured() {
         />
         <div className={style.featuredTitles}>
           <h1>Ooty</h1>
-          <h2>470 properties</h2>
+          <h2>{data[1]} properties</h2>
         </div>
       </div>
       <div className={style.featuredItem}>
@@ -33,7 +36,7 @@ function Featured() {
         />
         <div className={style.featuredTitles}>
           <h1>Mumbai</h1>
-          <h2>1,652 properties</h2>
+          <h2>{data[2]} properties</h2>
         </div>
       </div>
       <div className={style.featuredItem}>
@@ -44,7 +47,7 @@ function Featured() {
         />
         <div className={style.featuredTitles}>
           <h1>New Delhi</h1>
-          <h2>2,913 properties</h2>
+          <h2>{data[0]} properties</h2>
         </div>
       </div>
       <div className={style.featuredItem}>
@@ -55,10 +58,10 @@ function Featured() {
         />
         <div className={style.featuredTitles}>
           <h1>Banglore</h1>
-          <h2>2,043 properties</h2>
+          <h2>{data[1]} properties</h2>
         </div>
       </div>
-      
+      </>}
     </div>
   );
 }
