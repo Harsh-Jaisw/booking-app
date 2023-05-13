@@ -8,8 +8,6 @@ function GuestLove() {
     <div className={style.fp}>
        {loading ?"Loading": <>
        {data.map(item=>(
-
-       
        <div className={style.fpItem} key={item._id}>
         <img src={!item.photos[0] &&"https://cf.bstatic.com/xdata/images/hotel/square600/13125860.webp?k=35b70a7e8a17a71896996cd55d84f742cd15724c3aebaed0d9b5ba19c53c430b&o=" }alt="" className={style.fpImg} />
        <span className={style.fpname}>{item.name}</span>
@@ -23,8 +21,6 @@ function GuestLove() {
         </div>}
         </div>)) }
         </>}
-        
-        
     </div>
   )
 }

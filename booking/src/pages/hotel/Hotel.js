@@ -1,4 +1,4 @@
-import React,{useState} from "react";
+import React,{useContext, useState} from "react";
 import style from "./Hotel.module.css";
 import Navbar from "../../components/Navbar/Navbar";
 import Header from "../../components/header/Header";
@@ -9,17 +9,35 @@ import {BsFillArrowLeftCircleFill,BsFillArrowRightCircleFill} from "react-icons/
 import {AiFillCloseCircle} from "react-icons/ai"
 import useFetch from "../../hooks/useFetch";
 import { useLocation } from "react-router-dom";
+import { SearchContext } from "../../context/searchContext";
+import { AuthContext } from "../../context/AuthContext";
+import { useNavigate } from "react-router-dom";
+import Reserve from "../../components/reserve/Reserve";
 function Hotel() {
   const location =useLocation()
   // I get the location and path as well in which i can get id via split method.
   console.log(location)
-
+const navigate = useNavigate ()
   const id=location.pathname.split("/")[2]
   const [slideInd,setSlideInd]=useState(0)
   const[open,setOpen]=useState(false)
+  const [openModal,setOpenModal] = useState(false)
   const {data,loading,error,reFetch}=useFetch(`/hotels/find/${id}`)
-  console.log(data)
+  // console.log(data)
  
+  const {dates,options}=useContext(SearchContext)
+  const {user} = useContext(AuthContext)
+  // console.log(dates)
+  const MILLISECONDS_PER_DAY=1000*60*60*24
+  function dayDifference(date1,date2){
+    const timeDiff=Math.abs(date2.getTime()-date1.getTime())
+    const diffDays=Math.ceil(timeDiff/MILLISECONDS_PER_DAY)
+    return diffDays
+  }
+
+
+  const days=(dayDifference(dates[0].endDate,dates[0].startDate))
+
   function handleOpen(id){
    setSlideInd(id)
    setOpen(true)
@@ -32,6 +50,13 @@ function Hotel() {
      newSlideInd=slideInd===data.photos.length-1 ? 0:slideInd+1       
   }
   setSlideInd(newSlideInd)
+}
+const handleClick = () => {
+if(user){
+  setOpenModal(true)
+}else{
+    navigate('/login')
+}
 }
   return (
     <div>
@@ -70,16 +95,17 @@ function Hotel() {
              <p className={style.hotelDesc}>{data.description}</p>
             </div>
             <div className={style.hotelDetailsPrice}>
-              <h1>Property Highlights</h1>
+              <h1>Perfect for a {days}-night stay!</h1>
               <span>There are more repeat guests here than most other properties.</span>
-              <h2> <BsCurrencyRupee/><span></span></h2>
-              <button>Reserve</button>
+              <h2> <BsCurrencyRupee/><span>{days*data.cheapestPrice*options.room}</span></h2>
+              <button onClick={handleClick}>Reserve</button>
             </div>
           </div>
         </div>
         <MailList/>
         <Footer/>
       </div>}
+        {openModal && <Reserve setOpen={setOpenModal} hotelId={id} />}
     </div>
   );
 }

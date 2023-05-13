@@ -1,0 +1,39 @@
+body{
+  background-image: url('https://wallpaperaccess.com/full/4711385.jpg');
+  background-repeat: no-repeat;
+  background-position: center ;
+}
+
+.login {
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .lContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  .lInput{
+    height: 30px;
+    padding: 10px;
+  }
+  
+  .lButton {
+    border: none;
+    padding: 10px 20px;
+    background-color: #0071c2;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    border-radius: 5px;
+  }
+  
+  .lButton:disabled{
+    background-color: #0071c28c;
+    cursor: not-allowed;
+  }
+  

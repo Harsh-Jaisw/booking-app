@@ -12,10 +12,11 @@ function List() {
   const [open, setOpen] = useState(false);
   const [destination, setDestination] = useState(location.state.destination);
   const [options, setOptions] = useState(location.state.options);
-  const [date, setDate] = useState(location.state.date);
+  const [dates, setDates] = useState(location.state.dates);
   const [min,setMin]=useState(null)
   const [max,setMax]=useState(null)
   const {data,loading,error,reFetch}=useFetch(`/hotels?city=${destination}&min=${min ||0}&max=${max || 999}`)
+  console.log(location)
   console.log(data)
   function handleSearch(){
     reFetch()
@@ -35,14 +36,14 @@ function List() {
             <div className={style.lsItem}>
               <label>Check-in date</label>
               <span onClick={() => setOpen(!open)}>{`${format(
-                date[0].startDate,
+                dates[0].startDate,
                 "dd/MM/yyyy"
-              )} - ${format(date[0].endDate, "dd/MM/yyyy")} `}</span>
+              )} - ${format(dates[0].endDate, "dd/MM/yyyy")} `}</span>
               {open && (
                 <DateRange
-                  onChange={(item) => setDate([item.selection])}
+                  onChange={(item) => setDates([item.selection])}
                   minDate={new Date()}
-                  ranges={date}
+                  ranges={dates}
                 />
               )}
             </div>
