@@ -30,7 +30,6 @@
     display: flex;
     flex-direction: column;
     gap:5px;
-  
     margin-bottom: .625rem;
 }
 .lsItem>label{
@@ -41,7 +40,7 @@
     height:1.875rem;
     border: none;
     outline: none;
-    padding: .313rem;
+    /* padding: .313rem; */
     border-radius:7px
 }.lsItem>span{
     height:1.875rem;
@@ -78,4 +77,18 @@
     font-size: 1rem;
     font-weight:bolder;
     cursor: pointer;
+}
+@media screen and (max-width:810px){
+    .lsOptionItem{
+        width: 10rem; 
+    }
+    .lsOptions{
+        padding: 0;
+    }
+    .inputc{
+        width: 7rem;
+    }
+    .lsOptionInput{
+        width: 2rem;
+    }
 }

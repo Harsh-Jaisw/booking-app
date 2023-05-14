@@ -10,6 +10,9 @@ import { useContext } from "react";
 import { DarkModeContext } from "./context/darkModeContext";
 import {AuthContext} from './context/AuthContext'
 import {userColumns} from './datatablesource'
+import {hotelColumns,roomColumns} from './datatablesource'
+import NewHotel from "./pages/newHotel/NewHotel";
+import NewRoom from "./pages/newRoom/NewRoom";
 function App() {
   const { darkMode } = useContext(DarkModeContext);
   const ProtectedRoutes = ({children}) =>{
@@ -42,14 +45,28 @@ return <Navigate to='/login'/>
                 element={<ProtectedRoutes><New inputs={userInputs} title="Add New User" /></ProtectedRoutes>}
               />
             </Route>
-            <Route path="products">
-              <Route index element={<List />} />
+            <Route path="hotels">
+              <Route index element={ <ProtectedRoutes>
+            <List columns={hotelColumns} />
+            </ProtectedRoutes>} />
               <Route path=":productId" element={ <ProtectedRoutes>
             <Single />
             </ProtectedRoutes>} />
               <Route
                 path="new"
-                element={<ProtectedRoutes><New inputs={productInputs} title="Add New Product" /></ProtectedRoutes>}
+                element={<ProtectedRoutes><NewHotel   /></ProtectedRoutes>}
+              />
+            </Route>
+            <Route path="rooms">
+              <Route index element={ <ProtectedRoutes>
+            <List columns={roomColumns} />
+            </ProtectedRoutes>} />
+              <Route path=":productId" element={ <ProtectedRoutes>
+            <Single />
+            </ProtectedRoutes>} />
+              <Route
+                path="new"
+                element={<ProtectedRoutes><NewRoom   /></ProtectedRoutes>}
               />
             </Route>
           </Route>

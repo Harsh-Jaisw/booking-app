@@ -31,11 +31,11 @@ function List() {
             <h1 className={style.lsTitle}>Search</h1>
             <div className={style.lsItem}>
               <label>Destination</label>
-              <input type="text" placeholder={destination} />
+              <input type="text" placeholder={destination} className={style.inputc} />
             </div>
             <div className={style.lsItem}>
               <label>Check-in date</label>
-              <span onClick={() => setOpen(!open)}>{`${format(
+              <span className={style.inputc} onClick={() => setOpen(!open)}>{`${format(
                 dates[0].startDate,
                 "dd/MM/yyyy"
               )} - ${format(dates[0].endDate, "dd/MM/yyyy")} `}</span>

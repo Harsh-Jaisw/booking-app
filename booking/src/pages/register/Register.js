@@ -2,12 +2,17 @@ import axios from "axios";
 import { useContext, useState } from "react";
 import { useNavigate ,Link} from "react-router-dom";
 import { AuthContext } from "../../context/AuthContext";
-import style from "./Login.module.css";
+import style from "./Register.module.css";
 
-const Login = () => {
+const Register = () => {
   const [credentials, setCredentials] = useState({
     username: undefined,
+    email:undefined,
+    country:undefined,
+    city:undefined,
+    phone:undefined,
     password: undefined,
+
   });
 
   const {user, loading, error, dispatch } = useContext(AuthContext);
@@ -23,9 +28,9 @@ const Login = () => {
     e.preventDefault();
     dispatch({ type:"LOGIN_START"});
     try {
-      const res = await axios.post("/auth/login", credentials);
+      const res = await axios.post("/auth/register", credentials);
       dispatch({ type:"LOGIN_SUCCESS",payload: res.data.details });
-      navigate("/");
+      navigate("/login");
     } catch (err) {
       dispatch({ type:"LOGIN_FAILURE",payload: err.response.data });
     }
@@ -35,13 +40,42 @@ const Login = () => {
   return (
     <div className={style.login}>
       <div>
-        <img src="https://wallpapercave.com/wp/wp2234615.png" width='100%' height='479.5rem' alt="myimg.jpeg" />
+    <img src="https://wallpaperaccess.com/full/5675697.png" width='85%' height='479.5rem'
+     alt="myimg.jpeg"/>
       </div>
       <div className={style.lContainer}>
         <input
           type="text"
           placeholder="username"
           id="username"
+          onChange={handleChange}
+          className={style.lInput}
+        />
+        <input
+          type="email"
+          placeholder="email"
+          id="email"
+          onChange={handleChange}
+          className={style.lInput}
+        />
+        <input
+          type="text"
+          placeholder="country"
+          id="country"
+          onChange={handleChange}
+          className={style.lInput}
+        />
+        <input
+          type="text"
+          placeholder="city"
+          id="city"
+          onChange={handleChange}
+          className={style.lInput}
+        />
+        <input
+          type="text"
+          placeholder="phone"
+          id="phone"
           onChange={handleChange}
           className={style.lInput}
         />
@@ -57,13 +91,13 @@ const Login = () => {
           onClick={handleClick}
           className={style.lButton}
         >
-          Login
+          Register
         </button>
         {error && <span>{error.message}</span>}
-        Don't have an account ?<Link to="/register">Register</Link> 
+        Already have an account ? <Link to="/login">Login</Link>
       </div>
     </div>
   );
 };
 
-export default Login;
+export default Register;

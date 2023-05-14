@@ -77,7 +77,7 @@ if(user){
        
         </div>}
         <div className={style.hotelWrapper}>
-          <button className={style.booknow}>Reserve</button>
+          <button className={style.booknow} onClick={handleClick}>Reserve</button>
           <h1 className={style.hotelTitle}>{data.name}</h1>
           <div className={style.hotelAddress}>
             {data.address}

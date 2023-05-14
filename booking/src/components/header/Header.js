@@ -17,7 +17,7 @@ function Header({ type }) {
   const [open, setOpen] = useState(false);
   
   const {dispatch}=useContext(SearchContext)
-
+let currDate=new Date()
   const [dates, setDates] = useState([
     {
       startDate: new Date(),
@@ -84,7 +84,7 @@ const {user} = useContext(AuthContext)
             <p className={style.headerDesc}>
               Get a 20% discount on your first booking.
             </p>
-            {!user && <button className={style.headerBtn}>Login/SignUp</button>}
+            {!user && <button onClick={()=>navigate("/login")} className={style.headerBtn}>Login/SignUp</button>}
             <div className={style.headerSearch}>
               <div className={style.headerSearchItem}>
                 <input

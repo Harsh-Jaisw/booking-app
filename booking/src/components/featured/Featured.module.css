@@ -2,8 +2,9 @@
     width: 100%;
     max-width: 1024px;
     display: flex;
-    justify-content: space-between;
-    gap:1.25rem;
+    justify-content: center;
+    gap:2.2rem;
+    flex-wrap: wrap;
     z-index: 1;
 }
 .featuredItem{
@@ -24,3 +25,10 @@
     bottom:10px ;
     left:10px;
 }
+@media screen and (max-width:452px){
+    .featured{
+      flex-direction: column;
+      width: 50vw;
+      justify-content: center;
+    }
+    }

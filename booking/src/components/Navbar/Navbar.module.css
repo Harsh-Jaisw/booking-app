@@ -11,7 +11,7 @@
 }
 .navContainer{
     width:100%;
-    max-width: 1024px;
+    /* max-width: 1024px; */
     color: white;
     display: flex;
     align-items: center;
@@ -21,9 +21,28 @@
     font-weight: 700;
 }
 .navButton{
-  margin-left:20px;
+  /* margin-left:20px; */
+  /* display: flex; */
+  gap: 1rem;
   border:none;
-  padding:5px 10px;
+  /* padding:5px 10px; */
   cursor: pointer;
   color:red;
+  border-radius: 3px;
+  width: 5.5rem;
+  height: 1.2rem;
+}
+.navItems{
+    display: flex;
+    justify-content: flex-end;
+    flex: 1;
+    gap:1rem
+}
+@media screen and (max-width:576px){
+.navItems{
+    justify-content: center;
+}
+.navButton{
+    width: 3.2rem;
+}
 }

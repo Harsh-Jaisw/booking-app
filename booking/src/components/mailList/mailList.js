@@ -18,7 +18,6 @@ function MailList() {
        <TextField
           id="outlined-textarea"
           label="Your email"
-          // autoFocus="true"
           color="grey"
           placeholder="e.g.,john@mail.com"
           multiline

@@ -2,7 +2,8 @@
     width: 100%;
     max-width: 1024px;
     display: flex;
-    justify-content: space-between;
+    justify-content:space-between;
+    flex-wrap: wrap;
     gap:1.25rem
 }
 .pListItem{
@@ -23,3 +24,10 @@
     font-size: .875rem;
     font-weight: 300;
 }
+@media screen and (max-width:452px){
+    .pList{
+      flex-direction: column;
+      width: 50vw;
+      justify-content: center;
+    }
+    }

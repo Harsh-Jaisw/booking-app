@@ -10,7 +10,7 @@ import MailList from '../../components/mailList/mailList'
 import Footer from '../../components/footer/Footer'
 function Home() {
   return (
-   <div>
+   <>
     <Navbar/>
     <Header />
     <div  className={style.homeContainer}><Featured/>
@@ -19,9 +19,9 @@ function Home() {
     <h1 className={style.homeTitle}>Home guests love</h1>
     <GuestLove/>
     <MailList/>
-    <Footer/>
+    {/* <Footer/> */}
     </div>
-    </div>
+    </>
   )
 }
 

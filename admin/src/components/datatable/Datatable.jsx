@@ -7,22 +7,25 @@ import useFetch from '../../hooks/useFetch'
 import axios from 'axios'
 import {useLocation} from 'react-router-dom'
 
-const Datatable = () => {
+const Datatable = ({columns}) => {
   const location = useLocation()
   const path = location.pathname.split('/')[1]
-  const [list,setList] = useState()
+  console.log(path)
+  const [list,setList] = useState(null)
   const {data,loading,error} = useFetch(`/${path}`)
-
+  .then((res)=>res.json())
+  .then((apiData)=>console.log(apiData))
   useEffect(()=>{
     setList(data)
-  })
+  },[data])
+  console.log(data,'hii')
   const handleDelete = async (id) => {
     try{
       await axios.delete(`/${path}/${id}`)
     }catch(err){
 
     }
-    setData(list.filter((item) => item.id !== id));
+    setList(list.filter((item) => item.id !== id));
   };
 
   const actionColumn = [
@@ -50,15 +53,15 @@ const Datatable = () => {
   return (
     <div className="datatable">
       <div className="datatableTitle">
-        Add New User
-        <Link to="/users/new" className="link">
+       {path}
+        <Link to={`/${path}/new`} className="link">
           Add New
         </Link>
       </div>
       <DataGrid
         className="datagrid"
         rows={list}
-        columns={userColumns.concat(actionColumn)}
+        columns={columns.concat(actionColumn)}
         pageSize={9}
         rowsPerPageOptions={[9]}
         checkboxSelection
